@@ -24,6 +24,9 @@ func Linspace(start float64, stop float64, numsteps int) ([]float64, error) {
 // output: 
 // the estimated root (root), function value (fx), error estimate (ea), iterations done (iter)
 func Bisection(f func(float64) float64, xl float64, xu float64, es float64, maxit int) (root float64, fx float64, ea float64, iter int, err error) {
+    if es < 0.0 {
+        return 0.0, 0.0, 0.0, 0, errors.New("es must be greater than 0")
+    }
     if test := f(xl)*f(xu); test > 0.0 {
         return 0.0, 0.0, 0.0, 0, errors.New("No sign change in interval")
     }
@@ -59,6 +62,9 @@ func Bisection(f func(float64) float64, xl float64, xu float64, es float64, maxi
 // output: 
 // the estimated root (root), function value (fx), error estimate (ea), iterations done (iter)
 func Newtraph(f func(float64) float64, df func(float64) float64, xr float64, es float64, maxit int) (root float64, fx float64, ea float64, iter int, err error) {
+    if es < 0.0 {
+        return 0.0, 0.0, 0.0, 0, errors.New("es must be greater than 0")
+    }
     iter = 0
     var xrold float64
     ea = 100
@@ -83,6 +89,9 @@ func Newtraph(f func(float64) float64, df func(float64) float64, xr float64, es 
 // output: 
 // the estimated root (root), function value (fx), error estimate (ea), iterations done (iter)
 func Secant(f func(float64) float64, p float64, xr float64, es float64, maxit int) (root float64, fx float64, ea float64, iter int, err error) {
+    if es < 0.0 {
+        return 0.0, 0.0, 0.0, 0, errors.New("es must be greater than 0")
+    }
     iter = 0
     var xrold float64
     ea = 100
@@ -107,6 +116,9 @@ func Secant(f func(float64) float64, p float64, xr float64, es float64, maxit in
 // output: 
 // the estimated root (root), function value (fx), error estimate (ea), iterations done (iter)
 func InverseQuadracticInterpolation(f func(float64) float64, p float64, xr float64, es float64, maxit int) (root float64, fx float64, ea float64, iter int, err error) {
+    if es < 0.0 {
+        return 0.0, 0.0, 0.0, 0, errors.New("es must be greater than 0")
+    }
     iter = 0
     var xrold, x1, x2, y1, yr, y2 float64
     ea = 100
@@ -137,6 +149,9 @@ func InverseQuadracticInterpolation(f func(float64) float64, p float64, xr float
 // output: 
 // the estimated root (root), function value (fx), error estimate (ea), iterations done (iter)
 func BrentsMethod(f func(float64) float64, xl float64, xu float64, es float64, maxit int) (root float64, fx float64, ea float64, iter int, err error) {
+    if es < 0.0 {
+        return 0.0, 0.0, 0.0, 0, errors.New("es must be greater than 0")
+    }
     a := xl
     b := xu
     fa := f(a)
